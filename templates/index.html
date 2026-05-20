@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Seller SEO Generator</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Include icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div class="background-elements">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+    </div>
+
+    <div class="container">
+        <div class="card">
+            <div class="card-header">
+                <i data-lucide="shopping-bag" class="icon-brand"></i>
+                <h1>Amazon SEO Generator</h1>
+                <p>Instantly generate optimized keywords and titles for your product</p>
+            </div>
+
+            <form id="seo-form">
+                <div class="input-group">
+                    <label for="product_name">Product Name</label>
+                    <input type="text" id="product_name" name="product_name" placeholder="e.g. Wireless Noise Cancelling Headphones" required>
+                </div>
+                <button type="submit" id="generate-btn" class="btn-primary">
+                    <span class="btn-text">Generate SEO Content</span>
+                    <i data-lucide="sparkles" class="icon-btn"></i>
+                </button>
+            </form>
+
+            <div id="loading" class="hidden">
+                <div class="spinner"></div>
+                <p>Generating optimized content...</p>
+            </div>
+
+            <div id="results" class="hidden">
+                <div class="results-header">
+                    <h2>Generated Content</h2>
+                    <button id="copy-btn" class="btn-secondary" title="Copy all to clipboard">
+                        <i data-lucide="copy" class="icon-small"></i>
+                        <span>Copy All</span>
+                    </button>
+                </div>
+
+                <div class="result-section">
+                    <h3>Optimized Titles</h3>
+                    <ul id="titles-list" class="titles-list">
+                        <!-- Titles will be inserted here -->
+                    </ul>
+                </div>
+
+                <div class="result-section">
+                    <h3>SEO Keywords</h3>
+                    <div id="keywords-container" class="keywords-container">
+                        <!-- Keywords will be inserted here -->
+                    </div>
+                </div>
+            </div>
+            
+            <div id="error-message" class="hidden error-message"></div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+    <script>
+        // Initialize icons
+        lucide.createIcons();
+    </script>
+</body>
+</html>
