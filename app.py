@@ -9,11 +9,9 @@ load_dotenv()
 
 app = Flask(__name__)
 
-# Initialize Groq client
-# This expects GROQ_API_KEY to be set in the environment or .env file
-client = Groq(
-    api_key=os.environ.get("GROQ_API_KEY"),
-)
+# Initialize Groq client dynamically inside the route to prevent startup crashes
+# if the environment variable is missing on the live server.
+
 
 @app.route('/')
 def index():
@@ -28,6 +26,12 @@ def generate():
         return jsonify({"error": "Product name is required"}), 400
 
     try:
+        api_key = os.environ.get("GROQ_API_KEY")
+        if not api_key:
+            return jsonify({"error": "GROQ_API_KEY is not set in the Render environment variables."}), 500
+            
+        client = Groq(api_key=api_key)
+
         # Prompt for the Groq model
         prompt = f"""
 You are an expert Amazon SEO copywriter. A user is selling a product named "{product_name}".
